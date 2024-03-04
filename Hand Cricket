@@ -1,0 +1,32 @@
+# Let's make a hand cricket game which we used to play in childhood.
+# We have 2 players = A and B
+players = ["A", "B"]
+import random
+
+
+# We will make a function for batting which will give a random output.
+def bat():
+    return random.choice([1, 2, 3, 4, 5, 6])
+
+
+# Similarly we will make a function for balling also.
+def ball():
+    return random.choice([1, 2, 3, 4, 5, 6])
+
+
+max_score = 0
+winner = ""
+for player in players:  # we will give the chance to each player to bat.
+    score = 0
+    while True:
+        Bat = bat()
+        Ball = ball()
+        if Bat == Ball:
+            break
+        score += Bat
+        # Until the condition is not met the loop will keep running and with each loop the score will increase.
+    print(f"", player, "'s score:", score)
+    if max_score < score:
+        max_score = score
+        winner = player
+print(f"Winner is:", winner)
