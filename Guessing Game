@@ -1,0 +1,33 @@
+import random
+level = input("Choose the difficulty level of this game ('easy' or 'hard'): ")
+secret_num = random.choice(range(1, 51))
+if level == 'easy':
+    no_of_attempts = 10
+    while no_of_attempts != 0:
+        print(f"You have {no_of_attempts} guess remaining")
+        attempt = int(input("Make a guess: "))
+        if attempt == secret_num:
+            print("Yay! You guessed it right")
+            break
+        elif attempt < secret_num:
+            print("Your guess is less than the secret number")
+        elif attempt > secret_num:
+            print("Your guess is higher than the secret number")
+        no_of_attempts -= 1
+    if no_of_attempts == 0:
+        print("You're out of guesses, you lose")
+else:
+    no_of_attempts = 5
+    while no_of_attempts != 0:
+        print(f"You have {no_of_attempts} guess remaining")
+        attempt = int(input("Make a guess: "))
+        if attempt == secret_num:
+            print("Yay! You guessed it right")
+            break
+        elif attempt < secret_num:
+            print("Your guess is less than the secret number")
+        elif attempt > secret_num:
+            print("Your guess is higher than the secret number")
+        no_of_attempts -= 1
+    if no_of_attempts == 0:
+        print("You're out of guesses, you lose")
