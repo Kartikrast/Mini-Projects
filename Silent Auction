@@ -1,0 +1,17 @@
+bidders = {}
+bids = []
+more_bidders = False
+while not more_bidders:
+    name = input("Enter your name: ")
+    bid = int(input("What is your bid: "))
+    bidders[name] = bid
+    bids.append(bid)
+    a = input("Are there anymore bidders? 'yes' or 'no': ")
+    if a == 'no':
+        print(bidders)
+        break
+win_bid = max(bids)
+for key, value in bidders.items():
+    if value == win_bid:
+        winner = key
+print(f"Winner of the auction is: {winner}")
