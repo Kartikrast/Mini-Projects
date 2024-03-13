@@ -1,0 +1,29 @@
+import random
+words = ['apple', 'banana', 'pineapple', 'mango', 'orange', 'grapes']
+secret_word = random.choice(words)
+lives = 6
+letters = []
+for char in range(len(secret_word)):
+    letters.append('_')
+secret_word_l = []
+for c in secret_word:
+    secret_word_l.append(c)
+game_over = False
+while not game_over:
+    print(f'You have {lives} lives left. You have to guess the right word within these lives')
+    print(letters)
+    guess = input("Enter your guess: ")
+    if guess in secret_word:
+        for position in range(len(secret_word)):
+            if secret_word[position] == guess:
+                letters[position] = guess
+            if letters == secret_word_l:
+                game_over = True
+                print(letters)
+                print("You guessed the word. You win!")
+    elif guess not in secret_word:
+        print(f"{guess} not in secret word. Try again.")
+        lives -= 1
+        if lives == 0:
+            game_over = True
+            print("You're out of lives. You Lose!")
