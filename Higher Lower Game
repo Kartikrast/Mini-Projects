@@ -1,0 +1,49 @@
+import os
+import random
+import database as db
+import game_art
+def check_if_true(ans):
+    if followers_count_1 > followers_count_2:
+        right_ans = '1'
+    else:
+        right_ans = '2'
+    if ans == right_ans:
+        return True
+    else:
+        return False
+print(game_art.game_logo)
+choice_2 = random.choice(db.database)
+score = 0
+game_over = False
+while not game_over:
+    choice_1 = choice_2
+    choice_2 = random.choice(db.database)
+    while choice_1 == choice_2:
+        choice_2 = random.choice(db.database)
+    followers_count_1 = choice_1["follower_count"]
+    followers_count_2 = choice_2["follower_count"]
+
+
+    def display(choice):
+        a = choice['name']
+        b = choice['description']
+        c = choice['country']
+        if b[0] in "aeiouAEIOU":
+            return f"{a} is an {b} from {c}"
+        else:
+            return f"{a} is a {b} from {c}"
+
+    compare_1 = display(choice_1)
+    compare_2 = display(choice_2)
+    print(f"Compare 1: {compare_1}")
+    print(game_art.vs)
+    print(f"Compare 2: {compare_2}")
+    guess = input("Enter your guess, who has more followers option 1 or 2: ")
+    res = check_if_true(guess)
+    os.system("cls")
+    if res:
+        score += 1
+        print(f"You guessed it right. Your score is {score}")
+    else:
+        game_over = True
+        print(f"You guessed it wrong. Your score is {score}")
