@@ -1,0 +1,135 @@
+import resources as rs
+import os
+def resource_counter():
+    water = rs.resources['water']
+    milk = rs.resources['milk']
+    coffee = rs.resources['coffee']
+    sugar = rs.resources['sugar']
+    gas = rs.resources['gas']
+    if water <= 5:
+        print("Please refill water")
+        return True
+    elif milk <= 5:
+        print("Please refill milk")
+        return True
+    elif coffee <= 5:
+        print("Please refill coffee")
+        return True
+    elif sugar <= 5:
+        print("Please refill coffee")
+        return True
+    elif gas <= 5:
+        print("Please refill coffee")
+        return True
+    else:
+        return False
+
+def money_counter():
+    money_collector = False
+    while not money_collector:
+        note_5 = int(input("How many 5rs note: "))
+        note_10 = int(input("How many 10rs note: "))
+        note_20 = int(input("How many 20rs note: "))
+        money_collector = True
+        money_entered = (5 * note_5) + (10 * note_10) + (20 * note_20)
+        return money_entered
+
+
+def coffee_maker(want):
+    resources = rs.resources
+    if want == 'latte':
+        sugar = int(input("How many t-spoons of sugar would you like? (1 t-spoon = 5gm sugar): "))
+        resources['water'] -= 5
+        resources['milk'] -= 10
+        resources['coffee'] -= 5
+        resources['sugar'] -= sugar * 5
+        resources['gas'] -= 5
+        return f"Here is your {want} with {sugar} t-spoon sugar"
+    elif want == 'espresso':
+        sugar = int(input("How many t-spoons of sugar would you like? (1 t-spoon = 5gm sugar): "))
+        resources['water'] -= 10
+        resources['milk'] -= 5
+        resources['coffee'] -= 8
+        resources['sugar'] -= sugar * 5
+        resources['gas'] -= 5
+        return f"Here is your {want} with {sugar} t-spoon sugar"
+    else:
+        sugar = int(input("How many t-spoons of sugar would you like? (1 t-spoon = 5gm sugar): "))
+        resources['water'] -= 7
+        resources['milk'] -= 8
+        resources['coffee'] -= 6
+        resources['sugar'] -= sugar * 5
+        resources['gas'] -= 5
+        return f"Here is your {want} with {sugar} t-spoon sugar"
+
+money_collected = 0
+off = False
+while not off:
+    resource = resource_counter()
+    if resource:
+        print(resource)
+        break
+    else:
+        want = input("What would you like to have? (latte/espresso/cappuccino): ")
+        if want == 'latte':
+            cost = 30
+            print(f"Cost of latte is: {cost}")
+            money = money_counter()
+            if money == cost:
+                os.system('cls')
+                print(coffee_maker(want=want))
+            elif money > cost:
+                os.system('cls')
+                print(f"Here is your change of: {money - cost}")
+                money -= (money - cost)
+                print(coffee_maker(want=want))
+            else:
+                os.system('cls')
+                print(f"Money is not sufficient, here is your {money}rs. Cost of {want} is {cost}rs.")
+            money_collected += cost
+        elif want == 'espresso':
+            cost = 20
+            print(f"Cost of espresso is: {cost}")
+            money = money_counter()
+            if money == cost:
+                os.system('cls')
+                print(coffee_maker(want=want))
+            elif money > cost:
+                os.system('cls')
+                print(f"Here is your change of: {money - cost}")
+                money -= (money - cost)
+                print(coffee_maker(want=want))
+            else:
+                os.system('cls')
+                print(f"Money is not sufficient, here is your {money}rs. Cost of {want} is {cost}rs.")
+            money_collected += cost
+        elif want == 'cappuccino':
+            cost = 25
+            print(f"Cost of cappuccino is: {cost}")
+            money = money_counter()
+            if money == cost:
+                os.system('cls')
+                print(coffee_maker(want=want))
+            elif money > cost:
+                os.system('cls')
+                print(f"Here is your change of: {money - cost}")
+                money -= (money - cost)
+                print(coffee_maker(want=want))
+                money_collected += cost
+            elif money < cost:
+                os.system('cls')
+                print(f"Money is not sufficient, here is your {money}rs. Cost of {want} is {cost}rs.")
+            money_collected += cost
+        elif want == 'report':
+            password = 1234
+            pass_word = int(input("Enter the password: "))
+            while pass_word != password:
+                os.system('cls')
+                print("Wrong Password")
+            else:
+                os.system('cls')
+                print(f"Water = {rs.resources['water']}ml\nMilk = {rs.resources['milk']}ml\n"
+                      f"Coffee = {rs.resources['coffee']}gm\nSugar = {rs.resources['sugar']}gm\n"
+                      f"Money = {money_collected}\nGas = {rs.resources['gas']}")
+        elif want == 'off':
+            off = True
