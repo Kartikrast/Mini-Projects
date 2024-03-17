@@ -16,10 +16,10 @@ def resource_counter():
         print("Please refill coffee")
         return True
     elif sugar <= 5:
-        print("Please refill coffee")
+        print("Please refill Sugar")
         return True
     elif gas <= 5:
-        print("Please refill coffee")
+        print("Please refill Gas")
         return True
     else:
         return False
